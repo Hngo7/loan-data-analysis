@@ -1,0 +1,1237 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{exploration\_template}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{prosper-loan-data-analysis}{%
+\section{Prosper Loan Data Analysis}\label{prosper-loan-data-analysis}}
+
+    \hypertarget{introduction}{%
+\subsection{Introduction}\label{introduction}}
+
+    In this notebook, I will try to investigate this dataset, get insights
+from them, then visualization the results. I choose Prosper Loan Dataset
+because I was a banker before and I have some experience in the Loan
+process.
+
+Original dataset can be downloadable from the internet:
+https://s3.amazonaws.com/udacity-hosted-downloads/ud651/prosperLoanData.csv.
+
+This data set contains 113,937 loans with 81 variables on each loan,
+including loan amount, borrower rate (or interest rate), current loan
+status, borrower income, and many others.
+
+However, we are not expected to explore all of the variables in the
+dataset! We will focus our exploration on about 10-15 of them.
+
+    For those who are not familiar with financial indexes, this attached
+link can be useful to refer to any terms you don't know:
+https://docs.google.com/spreadsheets/d/1gDyi\_L4UvIrLTEC6Wri5nbaMmkGmLQBk-Yx3z0XDEtI/edit?usp=sharing
+
+The scope of this analysis is to find some common features of Prosper
+Loan Clients as well as some factors that may affect their loan status.
+
+    \hypertarget{wrangling-the-data}{%
+\subsection{Wrangling the data}\label{wrangling-the-data}}
+
+    We will start with cleaning the dataset, dropping some unneccessary and
+irrelevant data, filling some missing data with our caculated algorithm,
+then finally analyzing and visualizing it.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}200}]:} \PY{c+c1}{\PYZsh{}Imports some needed library, setting default style}
+          \PY{k+kn}{import} \PY{n+nn}{math}
+          \PY{k+kn}{import} \PY{n+nn}{datetime}
+          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+          \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{stats} \PY{k}{as} \PY{n}{st}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+          \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+          \PY{n}{sns}\PY{o}{.}\PY{n}{set\PYZus{}style}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{whitegrid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{set\PYZus{}context}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{figure.figsize}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mf}{7.5}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}201}]:} \PY{c+c1}{\PYZsh{}REad data from csv file }
+          \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{prosperLoanData.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}202}]:} \PY{c+c1}{\PYZsh{}Taking a look at the head of the data frame}
+          \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}202}]:}                 ListingKey  ListingNumber            ListingCreationDate  \textbackslash{}
+          0  1021339766868145413AB3B         193129  2007-08-26 19:09:29.263000000   
+          1  10273602499503308B223C1        1209647  2014-02-27 08:28:07.900000000   
+          2  0EE9337825851032864889A          81716  2007-01-05 15:00:47.090000000   
+          3  0EF5356002482715299901A         658116  2012-10-22 11:02:35.010000000   
+          4  0F023589499656230C5E3E2         909464  2013-09-14 18:38:39.097000000   
+          
+            CreditGrade  Term LoanStatus           ClosedDate  BorrowerAPR  \textbackslash{}
+          0           C    36  Completed  2009-08-14 00:00:00      0.16516   
+          1         NaN    36    Current                  NaN      0.12016   
+          2          HR    36  Completed  2009-12-17 00:00:00      0.28269   
+          3         NaN    36    Current                  NaN      0.12528   
+          4         NaN    36    Current                  NaN      0.24614   
+          
+             BorrowerRate  LenderYield    {\ldots}     LP\_ServiceFees  LP\_CollectionFees  \textbackslash{}
+          0        0.1580       0.1380    {\ldots}            -133.18                0.0   
+          1        0.0920       0.0820    {\ldots}               0.00                0.0   
+          2        0.2750       0.2400    {\ldots}             -24.20                0.0   
+          3        0.0974       0.0874    {\ldots}            -108.01                0.0   
+          4        0.2085       0.1985    {\ldots}             -60.27                0.0   
+          
+             LP\_GrossPrincipalLoss  LP\_NetPrincipalLoss LP\_NonPrincipalRecoverypayments  \textbackslash{}
+          0                    0.0                  0.0                             0.0   
+          1                    0.0                  0.0                             0.0   
+          2                    0.0                  0.0                             0.0   
+          3                    0.0                  0.0                             0.0   
+          4                    0.0                  0.0                             0.0   
+          
+             PercentFunded  Recommendations InvestmentFromFriendsCount  \textbackslash{}
+          0            1.0                0                          0   
+          1            1.0                0                          0   
+          2            1.0                0                          0   
+          3            1.0                0                          0   
+          4            1.0                0                          0   
+          
+            InvestmentFromFriendsAmount Investors  
+          0                         0.0       258  
+          1                         0.0         1  
+          2                         0.0        41  
+          3                         0.0       158  
+          4                         0.0        20  
+          
+          [5 rows x 81 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}203}]:} \PY{c+c1}{\PYZsh{}Taking a look at the whole data frame, columns name, identifying missing value and data type }
+          \PY{n}{df}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 113937 entries, 0 to 113936
+Data columns (total 81 columns):
+ListingKey                             113937 non-null object
+ListingNumber                          113937 non-null int64
+ListingCreationDate                    113937 non-null object
+CreditGrade                            28953 non-null object
+Term                                   113937 non-null int64
+LoanStatus                             113937 non-null object
+ClosedDate                             55089 non-null object
+BorrowerAPR                            113912 non-null float64
+BorrowerRate                           113937 non-null float64
+LenderYield                            113937 non-null float64
+EstimatedEffectiveYield                84853 non-null float64
+EstimatedLoss                          84853 non-null float64
+EstimatedReturn                        84853 non-null float64
+ProsperRating (numeric)                84853 non-null float64
+ProsperRating (Alpha)                  84853 non-null object
+ProsperScore                           84853 non-null float64
+ListingCategory (numeric)              113937 non-null int64
+BorrowerState                          108422 non-null object
+Occupation                             110349 non-null object
+EmploymentStatus                       111682 non-null object
+EmploymentStatusDuration               106312 non-null float64
+IsBorrowerHomeowner                    113937 non-null bool
+CurrentlyInGroup                       113937 non-null bool
+GroupKey                               13341 non-null object
+DateCreditPulled                       113937 non-null object
+CreditScoreRangeLower                  113346 non-null float64
+CreditScoreRangeUpper                  113346 non-null float64
+FirstRecordedCreditLine                113240 non-null object
+CurrentCreditLines                     106333 non-null float64
+OpenCreditLines                        106333 non-null float64
+TotalCreditLinespast7years             113240 non-null float64
+OpenRevolvingAccounts                  113937 non-null int64
+OpenRevolvingMonthlyPayment            113937 non-null float64
+InquiriesLast6Months                   113240 non-null float64
+TotalInquiries                         112778 non-null float64
+CurrentDelinquencies                   113240 non-null float64
+AmountDelinquent                       106315 non-null float64
+DelinquenciesLast7Years                112947 non-null float64
+PublicRecordsLast10Years               113240 non-null float64
+PublicRecordsLast12Months              106333 non-null float64
+RevolvingCreditBalance                 106333 non-null float64
+BankcardUtilization                    106333 non-null float64
+AvailableBankcardCredit                106393 non-null float64
+TotalTrades                            106393 non-null float64
+TradesNeverDelinquent (percentage)     106393 non-null float64
+TradesOpenedLast6Months                106393 non-null float64
+DebtToIncomeRatio                      105383 non-null float64
+IncomeRange                            113937 non-null object
+IncomeVerifiable                       113937 non-null bool
+StatedMonthlyIncome                    113937 non-null float64
+LoanKey                                113937 non-null object
+TotalProsperLoans                      22085 non-null float64
+TotalProsperPaymentsBilled             22085 non-null float64
+OnTimeProsperPayments                  22085 non-null float64
+ProsperPaymentsLessThanOneMonthLate    22085 non-null float64
+ProsperPaymentsOneMonthPlusLate        22085 non-null float64
+ProsperPrincipalBorrowed               22085 non-null float64
+ProsperPrincipalOutstanding            22085 non-null float64
+ScorexChangeAtTimeOfListing            18928 non-null float64
+LoanCurrentDaysDelinquent              113937 non-null int64
+LoanFirstDefaultedCycleNumber          16952 non-null float64
+LoanMonthsSinceOrigination             113937 non-null int64
+LoanNumber                             113937 non-null int64
+LoanOriginalAmount                     113937 non-null int64
+LoanOriginationDate                    113937 non-null object
+LoanOriginationQuarter                 113937 non-null object
+MemberKey                              113937 non-null object
+MonthlyLoanPayment                     113937 non-null float64
+LP\_CustomerPayments                    113937 non-null float64
+LP\_CustomerPrincipalPayments           113937 non-null float64
+LP\_InterestandFees                     113937 non-null float64
+LP\_ServiceFees                         113937 non-null float64
+LP\_CollectionFees                      113937 non-null float64
+LP\_GrossPrincipalLoss                  113937 non-null float64
+LP\_NetPrincipalLoss                    113937 non-null float64
+LP\_NonPrincipalRecoverypayments        113937 non-null float64
+PercentFunded                          113937 non-null float64
+Recommendations                        113937 non-null int64
+InvestmentFromFriendsCount             113937 non-null int64
+InvestmentFromFriendsAmount            113937 non-null float64
+Investors                              113937 non-null int64
+dtypes: bool(3), float64(50), int64(11), object(17)
+memory usage: 68.1+ MB
+
+    \end{Verbatim}
+
+    This data frame, in general, is having some issues that need to be
+solved.
+
+\begin{itemize}
+\item
+  At first, there are many variables that are not important or we don't
+  need due to the limit of our analysis. Getting rid of them will make
+  the dataset easier to read and understand.
+\item
+  Secondly, there are too many cells that have Null value, abnormal
+  value and improper types noticed in some columns. Some of them can be
+  calculated/inputted with algorithm. The more comprehensive the
+  dataframe has, the more easier the analysis task is.
+\end{itemize}
+
+    \hypertarget{firstly-dropping-redundant-unnecessary-columns-is-the-initial-step-to-make-the-data-set-more-clean.-it-makes-we-only-focusing-on-the-leftover-important-variables.}{%
+\subsubsection{Firstly, dropping redundant, unnecessary columns is the
+initial step to make the data set more clean. It makes we only focusing
+on the leftover important
+variables.}\label{firstly-dropping-redundant-unnecessary-columns-is-the-initial-step-to-make-the-data-set-more-clean.-it-makes-we-only-focusing-on-the-leftover-important-variables.}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}204}]:} \PY{c+c1}{\PYZsh{} Those columns are unnecessary as we make no use of them}
+          \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ListingKey}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ListingNumber}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LoanKey}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LoanNumber}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MemberKey}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}205}]:} \PY{c+c1}{\PYZsh{} I don\PYZsq{}t think we have anything to deal with date data as they have pretty much no effect to the outcome of the loan}
+          \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ListingCreationDate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ClosedDate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{DateCreditPulled}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LoanOriginationDate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LoanMonthsSinceOrigination}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LoanOriginationQuarter}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}206}]:} \PY{c+c1}{\PYZsh{}Loan history similiarly has very few impact on the loan\PYZsq{}s status of clients}
+          \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LoanCurrentDaysDelinquent}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LoanFirstDefaultedCycleNumber}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LP\PYZus{}CustomerPayments}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LP\PYZus{}CustomerPrincipalPayments}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LP\PYZus{}InterestandFees}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LP\PYZus{}ServiceFees}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LP\PYZus{}CollectionFees}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LP\PYZus{}GrossPrincipalLoss}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LP\PYZus{}NetPrincipalLoss}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LP\PYZus{}NonPrincipalRecoverypayments}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}207}]:} \PY{c+c1}{\PYZsh{} Similarity, there are some of the credit atributes are not really the important value for further analysis}
+          \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{CreditGrade}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EmploymentStatusDuration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FirstRecordedCreditLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{CurrentCreditLines}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{TotalCreditLinespast7years}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ScorexChangeAtTimeOfListing}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProsperRating (Alpha)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Occupation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{CurrentlyInGroup}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GroupKey}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{IncomeRange}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PercentFunded}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}208}]:} \PY{c+c1}{\PYZsh{} Investment information and recommendations are unnessccessary too}
+          \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Recommendations}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{InvestmentFromFriendsCount}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{InvestmentFromFriendsAmount}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Investors}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}209}]:} \PY{c+c1}{\PYZsh{} Take a look at the data set now}
+          \PY{n}{df}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 113937 entries, 0 to 113936
+Data columns (total 44 columns):
+Term                                   113937 non-null int64
+LoanStatus                             113937 non-null object
+BorrowerAPR                            113912 non-null float64
+BorrowerRate                           113937 non-null float64
+LenderYield                            113937 non-null float64
+EstimatedEffectiveYield                84853 non-null float64
+EstimatedLoss                          84853 non-null float64
+EstimatedReturn                        84853 non-null float64
+ProsperRating (numeric)                84853 non-null float64
+ProsperScore                           84853 non-null float64
+ListingCategory (numeric)              113937 non-null int64
+BorrowerState                          108422 non-null object
+EmploymentStatus                       111682 non-null object
+IsBorrowerHomeowner                    113937 non-null bool
+CreditScoreRangeLower                  113346 non-null float64
+CreditScoreRangeUpper                  113346 non-null float64
+OpenCreditLines                        106333 non-null float64
+OpenRevolvingAccounts                  113937 non-null int64
+OpenRevolvingMonthlyPayment            113937 non-null float64
+InquiriesLast6Months                   113240 non-null float64
+TotalInquiries                         112778 non-null float64
+CurrentDelinquencies                   113240 non-null float64
+AmountDelinquent                       106315 non-null float64
+DelinquenciesLast7Years                112947 non-null float64
+PublicRecordsLast10Years               113240 non-null float64
+PublicRecordsLast12Months              106333 non-null float64
+RevolvingCreditBalance                 106333 non-null float64
+BankcardUtilization                    106333 non-null float64
+AvailableBankcardCredit                106393 non-null float64
+TotalTrades                            106393 non-null float64
+TradesNeverDelinquent (percentage)     106393 non-null float64
+TradesOpenedLast6Months                106393 non-null float64
+DebtToIncomeRatio                      105383 non-null float64
+IncomeVerifiable                       113937 non-null bool
+StatedMonthlyIncome                    113937 non-null float64
+TotalProsperLoans                      22085 non-null float64
+TotalProsperPaymentsBilled             22085 non-null float64
+OnTimeProsperPayments                  22085 non-null float64
+ProsperPaymentsLessThanOneMonthLate    22085 non-null float64
+ProsperPaymentsOneMonthPlusLate        22085 non-null float64
+ProsperPrincipalBorrowed               22085 non-null float64
+ProsperPrincipalOutstanding            22085 non-null float64
+LoanOriginalAmount                     113937 non-null int64
+MonthlyLoanPayment                     113937 non-null float64
+dtypes: bool(2), float64(35), int64(4), object(3)
+memory usage: 36.7+ MB
+
+    \end{Verbatim}
+
+    \hypertarget{secondly-we-continue-with-filling-missing-value-for-the-data-set-setting-their-value-right-for-the-analizing-process}{%
+\subsubsection{Secondly, we continue with filling missing value for the
+data set, setting their value right for the analizing
+process}\label{secondly-we-continue-with-filling-missing-value-for-the-data-set-setting-their-value-right-for-the-analizing-process}}
+
+    APR is an important value, however, there are 113912 BorrowerAPR value
+instead of 113937 in the dataset. An easy fix is to caculate the missing
+APR as we know that BorrowerAPR = BorrowerRate + fee. So we can caculate
+the median fee, then add them to the missing cells.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}210}]:} \PY{n}{borrower\PYZus{}fees} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{BorrowerAPR}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{BorrowerRate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{borrower\PYZus{}fees}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}210}]:} 0.025019999999999987
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}211}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{BorrowerAPR}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{BorrowerRate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{+} \PY{n}{borrower\PYZus{}fees}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} Recheck to make sure the cells are filled}
+          \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{BorrowerAPR}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}211}]:} 0
+\end{Verbatim}
+            
+    EstimatedEffectiveYield, EstimatedLoss, EstimatedReturn are the next in
+line as they have only 84853 value compare to 113937 value of the whole
+dataset
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}212}]:} \PY{c+c1}{\PYZsh{}Effective yield is equal to the borrower interest rate (i) minus the servicing fee rate, (ii) minus estimated uncollected interest on charge\PYZhy{}offs, (iii) plus estimated collected late fees}
+          \PY{n}{estimated\PYZus{}loss\PYZus{}from\PYZus{}fees} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{BorrowerRate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EstimatedEffectiveYield}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{estimated\PYZus{}loss\PYZus{}from\PYZus{}fees}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}212}]:} 0.01915
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}213}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EstimatedEffectiveYield}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{BorrowerRate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{estimated\PYZus{}loss\PYZus{}from\PYZus{}fees}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EstimatedEffectiveYield}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}213}]:} 0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}214}]:} \PY{c+c1}{\PYZsh{} Estimated loss is the estimated principal loss on charge\PYZhy{}offs. We can fill the EstimatedLoss missing cells with their median}
+          \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EstimatedLoss}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}214}]:} 29084
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}215}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EstimatedLoss}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EstimatedLoss}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EstimatedLoss}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}215}]:} 0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}216}]:} \PY{c+c1}{\PYZsh{}Estimated return is the difference between the Estimated Effective Yield and the Estimated Loss Rate.}
+          \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EstimatedReturn}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EstimatedEffectiveYield}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EstimatedLoss}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EstimatedReturn}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}216}]:} 0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}217}]:} \PY{c+c1}{\PYZsh{}The numeric ProsperRating and the ProsperScore NaNs can both be replaced with median values.}
+          \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProsperRating (numeric)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProsperRating (numeric)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProsperScore}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProsperScore}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}218}]:} \PY{c+c1}{\PYZsh{}To fix Missing debt to income ratio}
+          \PY{c+c1}{\PYZsh{}We want to see how many debt to income ratio cell are missing }
+          \PY{n}{df\PYZus{}debt\PYZus{}income\PYZus{}null} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{DebtToIncomeRatio}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+          \PY{n}{df\PYZus{}debt\PYZus{}income\PYZus{}null}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}218}]:} Term                                   8554
+          LoanStatus                             8554
+          BorrowerAPR                            8554
+          BorrowerRate                           8554
+          LenderYield                            8554
+          EstimatedEffectiveYield                8554
+          EstimatedLoss                          8554
+          EstimatedReturn                        8554
+          ProsperRating (numeric)                8554
+          ProsperScore                           8554
+          ListingCategory (numeric)              8554
+          BorrowerState                          8482
+          EmploymentStatus                       8525
+          IsBorrowerHomeowner                    8554
+          CreditScoreRangeLower                  8548
+          CreditScoreRangeUpper                  8548
+          OpenCreditLines                        8430
+          OpenRevolvingAccounts                  8554
+          OpenRevolvingMonthlyPayment            8554
+          InquiriesLast6Months                   8442
+          TotalInquiries                         8539
+          CurrentDelinquencies                   8442
+          AmountDelinquent                       8410
+          DelinquenciesLast7Years                8442
+          PublicRecordsLast10Years               8442
+          PublicRecordsLast12Months              8430
+          RevolvingCreditBalance                 8430
+          BankcardUtilization                    8430
+          AvailableBankcardCredit                8432
+          TotalTrades                            8432
+          TradesNeverDelinquent (percentage)     8432
+          TradesOpenedLast6Months                8432
+          DebtToIncomeRatio                         0
+          IncomeVerifiable                       8554
+          StatedMonthlyIncome                    8554
+          TotalProsperLoans                      2170
+          TotalProsperPaymentsBilled             2170
+          OnTimeProsperPayments                  2170
+          ProsperPaymentsLessThanOneMonthLate    2170
+          ProsperPaymentsOneMonthPlusLate        2170
+          ProsperPrincipalBorrowed               2170
+          ProsperPrincipalOutstanding            2170
+          LoanOriginalAmount                     8554
+          MonthlyLoanPayment                     8554
+          dtype: int64
+\end{Verbatim}
+            
+    We stated that 8554 rows have missing debt to income ratio. However,
+fortunately, the index can be easily caculate using MonthlyLoanPayment
+and StatedMonthlyIncome
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}219}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{DebtToIncomeRatio}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MonthlyLoanPayment}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{/} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{StatedMonthlyIncome}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{DebtToIncomeRatio}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}219}]:} 15
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}220}]:} \PY{c+c1}{\PYZsh{}Still have 15 cells can\PYZsq{}t be filled? I think the problem may be related to the denominator. let\PYZsq{}s check}
+          \PY{n}{df\PYZus{}debt\PYZus{}income\PYZus{}still\PYZus{}null} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{DebtToIncomeRatio}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+          \PY{n}{df\PYZus{}debt\PYZus{}income\PYZus{}still\PYZus{}null}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{StatedMonthlyIncome}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}220}]:} 5169      0.0
+          14054     0.0
+          19922     0.0
+          24284     0.0
+          26810     0.0
+          39343     0.0
+          55429     0.0
+          57630     0.0
+          60207     0.0
+          61498     0.0
+          80964     0.0
+          90499     0.0
+          93386     0.0
+          95696     0.0
+          104466    0.0
+          Name: StatedMonthlyIncome, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}221}]:} \PY{c+c1}{\PYZsh{} My solution is to fill those value with unknown}
+          \PY{n}{df\PYZus{}debt\PYZus{}income\PYZus{}still\PYZus{}null}\PY{o}{=} \PY{n}{df\PYZus{}debt\PYZus{}income\PYZus{}still\PYZus{}null}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DebtToIncomeRatio}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Unknown}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{df\PYZus{}debt\PYZus{}income\PYZus{}still\PYZus{}null}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}221}]:} 5169     NaN
+          14054    NaN
+          19922    NaN
+          24284    NaN
+          26810    NaN
+          39343    NaN
+          55429    NaN
+          57630    NaN
+          60207    NaN
+          61498    NaN
+          80964    NaN
+          90499    NaN
+          93386    NaN
+          95696    NaN
+          104466   NaN
+          Name: DebtToIncomeRatio, dtype: float64
+\end{Verbatim}
+            
+    Now we take a look at Credit score. Since we have two columns named
+CreditScoreRangeLower and CreditScoreRangeUpper, simplifying them by
+taking the medium then create a new column named CreditScore. It would
+be much easier for us to analyze that index
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}222}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{CreditScoreRangeUpper}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{CreditScoreRangeUpper}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{+} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{CreditScoreRangeLower}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}
+          \PY{n}{df}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{index} \PY{o}{=} \PY{n+nb}{str}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{CreditScoreRangeUpper}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{CreditScore}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{CreditScoreRangeLower}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}223}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{CreditScore}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}223}]:} 0         649.5
+          1         689.5
+          2         489.5
+          3         809.5
+          4         689.5
+          5         749.5
+          6         689.5
+          7         709.5
+          8         829.5
+          9         829.5
+          10        649.5
+          11        649.5
+          12        689.5
+          13        749.5
+          14        749.5
+          15        709.5
+          16        649.5
+          17        769.5
+          18        749.5
+          19        689.5
+          20        669.5
+          21        629.5
+          22        709.5
+          23        689.5
+          24        669.5
+          25        689.5
+          26        669.5
+          27        709.5
+          28        729.5
+          29        749.5
+                    {\ldots}  
+          113907    649.5
+          113908    709.5
+          113909    809.5
+          113910    649.5
+          113911    669.5
+          113912    809.5
+          113913    789.5
+          113914    529.5
+          113915    629.5
+          113916    669.5
+          113917    669.5
+          113918    749.5
+          113919    689.5
+          113920    749.5
+          113921      NaN
+          113922    649.5
+          113923    709.5
+          113924    649.5
+          113925    689.5
+          113926    549.5
+          113927    769.5
+          113928    749.5
+          113929    669.5
+          113930    689.5
+          113931    809.5
+          113932    709.5
+          113933    709.5
+          113934    709.5
+          113935    689.5
+          113936    689.5
+          Name: CreditScore, Length: 113937, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}224}]:} \PY{n}{df}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+Index: 113937 entries, 0 to 113936
+Data columns (total 43 columns):
+Term                                   113937 non-null int64
+LoanStatus                             113937 non-null object
+BorrowerAPR                            113937 non-null float64
+BorrowerRate                           113937 non-null float64
+LenderYield                            113937 non-null float64
+EstimatedEffectiveYield                113937 non-null float64
+EstimatedLoss                          113937 non-null float64
+EstimatedReturn                        113937 non-null float64
+ProsperRating (numeric)                113937 non-null float64
+ProsperScore                           113937 non-null float64
+ListingCategory (numeric)              113937 non-null int64
+BorrowerState                          108422 non-null object
+EmploymentStatus                       111682 non-null object
+IsBorrowerHomeowner                    113937 non-null bool
+CreditScore                            113346 non-null float64
+OpenCreditLines                        106333 non-null float64
+OpenRevolvingAccounts                  113937 non-null int64
+OpenRevolvingMonthlyPayment            113937 non-null float64
+InquiriesLast6Months                   113240 non-null float64
+TotalInquiries                         112778 non-null float64
+CurrentDelinquencies                   113240 non-null float64
+AmountDelinquent                       106315 non-null float64
+DelinquenciesLast7Years                112947 non-null float64
+PublicRecordsLast10Years               113240 non-null float64
+PublicRecordsLast12Months              106333 non-null float64
+RevolvingCreditBalance                 106333 non-null float64
+BankcardUtilization                    106333 non-null float64
+AvailableBankcardCredit                106393 non-null float64
+TotalTrades                            106393 non-null float64
+TradesNeverDelinquent (percentage)     106393 non-null float64
+TradesOpenedLast6Months                106393 non-null float64
+DebtToIncomeRatio                      113922 non-null float64
+IncomeVerifiable                       113937 non-null bool
+StatedMonthlyIncome                    113937 non-null float64
+TotalProsperLoans                      22085 non-null float64
+TotalProsperPaymentsBilled             22085 non-null float64
+OnTimeProsperPayments                  22085 non-null float64
+ProsperPaymentsLessThanOneMonthLate    22085 non-null float64
+ProsperPaymentsOneMonthPlusLate        22085 non-null float64
+ProsperPrincipalBorrowed               22085 non-null float64
+ProsperPrincipalOutstanding            22085 non-null float64
+LoanOriginalAmount                     113937 non-null int64
+MonthlyLoanPayment                     113937 non-null float64
+dtypes: bool(2), float64(34), int64(4), object(3)
+memory usage: 41.7+ MB
+
+    \end{Verbatim}
+
+    Scrolling down to the bottom, one can not deny that we are missing too
+many value in TotalProsperLoans and some columns next to it
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}225}]:} \PY{c+c1}{\PYZsh{} Filling those value with 0 may solve the problem}
+          \PY{n}{to\PYZus{}fill\PYZus{}column}\PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{TotalProsperLoans}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{TotalProsperPaymentsBilled}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OnTimeProsperPayments}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                          \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProsperPaymentsLessThanOneMonthLate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProsperPaymentsOneMonthPlusLate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                          \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProsperPrincipalBorrowed}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProsperPrincipalOutstanding}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{df}\PY{p}{[}\PY{n}{to\PYZus{}fill\PYZus{}column}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{to\PYZus{}fill\PYZus{}column}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{df}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}225}]:} Term                                      0
+          LoanStatus                                0
+          BorrowerAPR                               0
+          BorrowerRate                              0
+          LenderYield                               0
+          EstimatedEffectiveYield                   0
+          EstimatedLoss                             0
+          EstimatedReturn                           0
+          ProsperRating (numeric)                   0
+          ProsperScore                              0
+          ListingCategory (numeric)                 0
+          BorrowerState                          5515
+          EmploymentStatus                       2255
+          IsBorrowerHomeowner                       0
+          CreditScore                             591
+          OpenCreditLines                        7604
+          OpenRevolvingAccounts                     0
+          OpenRevolvingMonthlyPayment               0
+          InquiriesLast6Months                    697
+          TotalInquiries                         1159
+          CurrentDelinquencies                    697
+          AmountDelinquent                       7622
+          DelinquenciesLast7Years                 990
+          PublicRecordsLast10Years                697
+          PublicRecordsLast12Months              7604
+          RevolvingCreditBalance                 7604
+          BankcardUtilization                    7604
+          AvailableBankcardCredit                7544
+          TotalTrades                            7544
+          TradesNeverDelinquent (percentage)     7544
+          TradesOpenedLast6Months                7544
+          DebtToIncomeRatio                        15
+          IncomeVerifiable                          0
+          StatedMonthlyIncome                       0
+          TotalProsperLoans                         0
+          TotalProsperPaymentsBilled                0
+          OnTimeProsperPayments                     0
+          ProsperPaymentsLessThanOneMonthLate       0
+          ProsperPaymentsOneMonthPlusLate           0
+          ProsperPrincipalBorrowed                  0
+          ProsperPrincipalOutstanding               0
+          LoanOriginalAmount                        0
+          MonthlyLoanPayment                        0
+          dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}226}]:} \PY{c+c1}{\PYZsh{} replacing those remaining Null value with \PYZdq{}Unknown\PYZdq{}}
+          \PY{n}{object\PYZus{}type\PYZus{}col} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{select\PYZus{}dtypes}\PY{p}{(}\PY{n}{include}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{object}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}
+          \PY{n}{df}\PY{p}{[}\PY{n}{object\PYZus{}type\PYZus{}col}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{object\PYZus{}type\PYZus{}col}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Unknown}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{df}\PY{o}{.}\PY{n}{select\PYZus{}dtypes}\PY{p}{(}\PY{n}{exclude}\PY{o}{=}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{number}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}226}]:} LoanStatus             0
+          BorrowerState          0
+          EmploymentStatus       0
+          IsBorrowerHomeowner    0
+          IncomeVerifiable       0
+          dtype: int64
+\end{Verbatim}
+            
+    \hypertarget{visualizing-the-data}{%
+\subsection{Visualizing the data}\label{visualizing-the-data}}
+
+    \hypertarget{loan-purpose-by-category}{%
+\subsubsection{Loan Purpose by
+Category}\label{loan-purpose-by-category}}
+
+    Loan purpose is an important index as it can easily tell us the validity
+of clients' request when they start applying to the loan. When a loan
+purpose doesn't fit the bank policy, client can be rejected form the
+beginning process.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}227}]:} \PY{c+c1}{\PYZsh{} To get insight from this index, we have to convert ListingCategory columns into an easy read data in stead of just numbers.}
+          \PY{n}{df}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{to\PYZus{}replace}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ListingCategory (numeric)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{\PYZob{}}\PY{l+m+mi}{0}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Unknown}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Debt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Reno}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Business}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Personal}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                                                          \PY{l+m+mi}{5}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Student}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Auto}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Other}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Baby}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Boat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                                                                          \PY{l+m+mi}{10}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cosmetic}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Engagement}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Green}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{13}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Household}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                                                          \PY{l+m+mi}{14}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LargePurchase}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Medical}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Motorcycle}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{17}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{RV}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                                                          \PY{l+m+mi}{18}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Taxes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{19}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Vacation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wedding}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{df}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{n+nb}{str}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ListingCategory (numeric)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ListingCategory}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} Sorting category for a better looking graph}
+          \PY{n}{listing\PYZus{}category} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ListingCategory}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{)}
+          \PY{n}{listing\PYZus{}category}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}227}]:} RV                  52
+          Green               59
+          Boat                85
+          Cosmetic            91
+          Baby               199
+          Engagement         217
+          Motorcycle         304
+          Student            756
+          Vacation           768
+          Wedding            771
+          LargePurchase      876
+          Taxes              885
+          Medical           1522
+          Household         1996
+          Personal          2395
+          Auto              2572
+          Business          7189
+          Reno              7433
+          Other            10494
+          Unknown          16965
+          Debt             58308
+          Name: ListingCategory, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}228}]:} \PY{c+c1}{\PYZsh{} using Horizontal bar}
+          \PY{n}{listing\PYZus{}category}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{barh}\PY{p}{(}\PY{n}{figsize}\PY{o}{=} \PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Value Counts}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Loan Purpose}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Loan Purpose by Category}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As illustrated in the graph, ``For paying debt'' purpose accounts for a
+vast majority of the loan purpose. It may be a regular sense of some
+financial companies but It is not a good news from the Macroeconomics
+point of view. Having a new debt to pay for another debt may indicate
+that the consumer's financial strength is rely mostly on financial
+leverage instead of their true asset.
+
+    \hypertarget{credit-score-by-prosper-score}{%
+\subsubsection{Credit Score by Prosper
+Score}\label{credit-score-by-prosper-score}}
+
+    Credit Score has a big impact on the acceptance rate and borrowing rate
+of the loan. Prosper Loan Company, on the other hand, has developed
+their own score to rate their clients. We will see how comparative these
+two index are when they are placed next to each other.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}229}]:} \PY{n}{ax} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{violinplot}\PY{p}{(}\PY{n}{x}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ProsperScore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y} \PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CreditScore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data} \PY{o}{=} \PY{n}{df}\PY{p}{,} \PY{n}{scale} \PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{width}\PY{l+s+s1}{\PYZsq{}} \PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Credit Score by Prosper Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{400}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}Quanghuy289\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}scipy\textbackslash{}stats\textbackslash{}stats.py:1713: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+  return np.add.reduce(sorted[indexer] * weights, axis=axis) / sumval
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}229}]:} (400, 1000)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_49_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Prosper Score seems to be evenly distributed among a scale of 10.
+CreditScore have a very litte impact to the clients's Prosper Score. I
+would think that they are using some other indexes for creating clients'
+Prosper Score.
+
+    \hypertarget{employment-status-of-the-borrower}{%
+\subsubsection{Employment Status of the
+Borrower}\label{employment-status-of-the-borrower}}
+
+    Employement status is another category that show the financial status of
+debtor. The higher chance they are employed and having a full-time job,
+the higher chance they have their income to pay for their loan
+installment.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}230}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EmploymentStatus}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}230}]:} Employed         67322
+          Full-time        26355
+          Self-employed     6134
+          Not available     5347
+          Other             3806
+          Unknown           2255
+          Part-time         1088
+          Not employed       835
+          Retired            795
+          Name: EmploymentStatus, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}231}]:} \PY{c+c1}{\PYZsh{}We replace \PYZsq{}Not available\PYZsq{} to \PYZsq{}Unknown\PYZsq{} as they are the same category}
+          \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EmploymentStatus}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Not available}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unknown}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EmploymentStatus}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}231}]:} Employed         67322
+          Full-time        26355
+          Unknown           7602
+          Self-employed     6134
+          Other             3806
+          Part-time         1088
+          Not employed       835
+          Retired            795
+          Name: EmploymentStatus, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}232}]:} \PY{n}{labels} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Employed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Full\PYZus{}Time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unknown}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Self\PYZhy{}employed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Other}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Part\PYZhy{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Not employed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Retired}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{pie}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EmploymentStatus}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{autopct}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}1.0f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{startangle}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{,} \PY{n}{pctdistance}\PY{o}{=}\PY{l+m+mf}{1.1}\PY{p}{,} \PY{n}{labeldistance}\PY{o}{=}\PY{l+m+mf}{1.3}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}creating a donut pie}
+          \PY{n}{centre\PYZus{}circle} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{Circle}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,}\PY{l+m+mf}{0.70}\PY{p}{,}\PY{n}{fc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{white}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{gcf}\PY{p}{(}\PY{p}{)}
+          \PY{n}{fig}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}artist}\PY{p}{(}\PY{n}{centre\PYZus{}circle}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Adding title and legend}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Employment Status of the Borrower}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{labels}\PY{o}{=}\PY{n}{labels}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Equal aspect ratio ensures that pie is drawn as a circle}
+          \PY{c+c1}{\PYZsh{}plt.tight\PYZus{}layout()}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{equal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_55_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Employed clients account for 64\% of the borrower, followed by Full-time
+and Self-employed with the high of 23\% and 5\% respectively. However,
+there are a total of around 13\% fall in to Unknown, Not Employed and
+Other\ldots{} category. That client should be followed to make a plan
+with a good source of income for them to be able to pay for the loan.
+
+    \hypertarget{conclusion}{%
+\subsection{Conclusion}\label{conclusion}}
+
+    Prosper Loan Company does a good job in collecting their loan data of
+clients. However, It takes some steps in cleaning and simplifying the
+dataset before it ready to be used. It is a good practice for me to use
+my skills to analize and visualize these data. And from there, I think
+the company can have a good understanding of their clients as well as
+they can create a plan to better their products/services.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
