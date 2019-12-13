@@ -1,5 +1,7 @@
 # prosper-loan-data
 
+* Please click into the loan-data-presentation.pdf file to see the presentation of my Project.
+
 ## Introduction
 In this notebook, I will try to investigate this dataset, get insights from them, then visualization the results. I choose Prosper Loan Dataset because I was a banker before and I have some experience in the Loan process.
 
